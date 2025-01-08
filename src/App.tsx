@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import  { Suspense, useState } from 'react';
 import { Loader } from './components/loader/Loader';
 import { PokemonModalProvider } from './context/PokemonModalProvider';
