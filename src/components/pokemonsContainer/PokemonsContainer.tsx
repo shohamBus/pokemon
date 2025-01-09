@@ -1,7 +1,6 @@
 import PokemonCard from '../pokemonCard/PokemonCard';
 import usePokemons from '../../hooks/usePokemons';
-import { Pokemon } from '../../utils/types';
-
+import './style.scss';
 interface PokemonsContainerProps {
     type: string
 }
@@ -14,7 +13,7 @@ const PokemonsContainer = (props:PokemonsContainerProps) => {
     
     return (
         <div className='pokemons-container'>
-            { pokemons?.map((pokemon:Pokemon) =>
+            { pokemons?.map((pokemon:any) =>
                 { 
                 return <PokemonCard key={ pokemon.id } pokemon={ pokemon } />
 }) }

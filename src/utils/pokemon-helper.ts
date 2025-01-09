@@ -1,10 +1,9 @@
 import { logDOM } from "@testing-library/react";
-import { Pokemon } from "./types";
 
 export const getTypeIconSrc = (type:string) => `./images/types-icons/${ type }.svg`;
 
 
-export const formatPokemonData = (pokemon: Pokemon) => {
+export const formatPokemonData = (pokemon: any) => {
     const { id, name, sprites, weight, height, types } = pokemon;
     
     const weightInKg = (weight / 10 ) + 'kg';
@@ -31,7 +30,6 @@ export const formatPokemonData = (pokemon: Pokemon) => {
  * @returns {Array} - The formatted stats array.
  */
 export function formatStats(stats) {
-    console.log('status',status);
     
     const statsMaxValues = {
         hp: 714,
@@ -43,8 +41,6 @@ export function formatStats(stats) {
     }
 
     const statsObject = stats.map(({ stat, base_stat }) => {
-        console.log('stat',stat);
-        console.log('base_stat',base_stat);
 
         return {
             name: removeHyphens(stat.name),

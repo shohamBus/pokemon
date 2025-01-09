@@ -226,46 +226,9 @@ $types: (
   z-index: -1;
 }
 
-.types-bar {
-  display: flex;
-  width: 100%;
-  padding: 15px 2vw; 
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 30px auto;
-  gap: 10px;
-  background: #eef5fd;
-  border-radius: 10vw;
-  box-shadow: 0 0 10px 5px #d5d5d5;
-}
 
-.types-bar a {
-  display: flex;
-  width: 7vw;
-  height: 7vw;
-  padding: 1.5vw;
-  cursor: pointer;
-  border-radius: 100%;
-  background: currentColor;
-  transition: transform .3s;
-}
 
-.types-bar a img {
-  width: 100%;
-  height: 100%;
-}
 
-.types-bar a:hover {
-  transform:scale(1.2);
-}
-
-.pokemons-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-}
 
 .pokemon-card {
   position: relative;
@@ -711,16 +674,7 @@ td.range-slide {
     max-width: 10vw;
   }
 
-  .types-bar {
-    width: 48%;
-    padding: 1vw 2vw;
-  }
 
-  .types-bar a {
-    width: 3vw;
-    height: 3vw;
-    padding: 0.5vw;
-  }
 
   .modal {
     --main-padding: 3vw 3vw 0 3vw;

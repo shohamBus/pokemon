@@ -1,9 +1,9 @@
-import React from 'react';
-import { usePokemonModal } from '../../context/PokemonModalProvider';
+import React, { useContext } from 'react';
 import { getTypeIconSrc } from '../../utils/pokemon-helper';
+import { PokemonModalContext, PokemonModalContextType } from '../../context/PokemonModalProvider';
 
 const IntroModal = () => {
-    const { currentPokemon, closeModal } = usePokemonModal();
+    const { currentPokemon, closeModal } = useContext(PokemonModalContext) as PokemonModalContextType;
 
     return (
         <div className='pokemon-intro'>
@@ -22,6 +22,8 @@ const IntroModal = () => {
                     <div className='types'>
                         {
                             currentPokemon.types.map(({ name }) => {
+                                console.log(name);
+                                
                                 const typeImg = getTypeIconSrc(name)
 
                                 return (

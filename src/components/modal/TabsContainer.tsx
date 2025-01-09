@@ -2,7 +2,7 @@ import  { Suspense, useState } from 'react';
 import Evolution from './tabs/Evolution';
 import About from './tabs/About';
 import Stats from './tabs/Stats';
-import Loader from '../Loader';
+import { Loader } from '../loader/Loader';
 
 const TabsContainer = () => {
     const tabs = [
@@ -20,7 +20,7 @@ const TabsContainer = () => {
                     tabs.map(({ id }, index) => (
                         <button
                             key={ id }
-                            className={ index === currentTab ? 'active' : null }
+                            className={ index === currentTab ? 'active' : undefined }
                             onClick={ () => setCurrentTab(index) }
                         >
                             { id }

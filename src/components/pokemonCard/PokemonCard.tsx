@@ -1,5 +1,6 @@
+import { useContext } from 'react';
+import { PokemonModalContext, PokemonModalContextType } from '../../context/PokemonModalProvider';
 import { getTypeIconSrc } from '../../utils/pokemon-helper';
-import { usePokemonModal } from '../../context/PokemonModalProvider';
 
 interface Pokemon {
     paddedId: string;
@@ -15,16 +16,15 @@ interface PokemonCardProps {
 
 const PokemonCard = (props:PokemonCardProps) => {
     const { pokemon } = props;
-    const { openModal } = usePokemonModal();
-
+    const { openModal } = useContext(PokemonModalContext) as PokemonModalContextType;
     return (
         <div
             onClick={ () => openModal(pokemon) }
             className={ `pokemon-card ${ pokemon.types[0].name }` }
         >
             <div>
-                <span className='id-number'>{ '#' + pokemon.paddedId }</span>
-                <span className='pokemon-name'>{ pokemon.name }</span>
+                <span className='id-number'>{ '#' + pokemon?.paddedId }</span>
+                <span className='pokemon-name'>{ pokemon?.name }</span>
 
                 <div className='types'>
                     {

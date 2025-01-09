@@ -1,6 +1,14 @@
 import React from 'react';
 
-const DataRow = ({ catergory, value, max }) => {
+interface DataRowProps {
+    catergory:any
+     value:any
+    max?:any
+}
+
+const DataRow = (props:DataRowProps) => {
+    const {catergory,value,max}=props;
+    
     return (
         <tr>
             <td className='category'>{ catergory }</td>

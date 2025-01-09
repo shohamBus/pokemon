@@ -1,25 +1,32 @@
-import React, { createContext, useContext, useState } from 'react';
-import { Pokemon } from '../utils/types';
+import React, { useState } from 'react';
 
-export const PokemonModalContext = createContext();
+export interface PokemonModalContextType {
+    closeModal: () => void;
+    currentPokemon: any | null ;
+    openModal: (pokemon: any) => void;
+    isModalOpen: boolean;
+}
 
-export const usePokemonModal = () => {
-    return useContext(PokemonModalContext);
-};
+export const PokemonModalContext = React.createContext<PokemonModalContextType | null>(null);
 
-export const PokemonModalProvider = ({ children }) => {
-    const [modal, setModal] = useState({ isOpen: false, pokemon: null });
 
-    const value = {
-        currentPokemon: modal.pokemon,
-        openModal: (pokemon:Pokemon) => setModal({ isOpen: true, pokemon }),
-        isModalOpen: modal.isOpen,
-        closeModal: () => setModal((prev => ({ ...prev, isOpen: false }))),
-    };
+
+// interface PokemonModalProviderProps {
+//     children: React.ReactNode;
+// }
+
+export const PokemonModalProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+    const [modal, setModal] = useState<{ isOpen: boolean; pokemon: any | null }>({ isOpen: false, pokemon: null });
+    const closeModal = () => setModal((prev) => ({ ...prev, isOpen: false }));
+    const currentPokemon = modal.pokemon;
+    const openModal = (pokemon: any) => setModal({ isOpen: true, pokemon: pokemon || null });
+    const isModalOpen = modal.isOpen;
+
 
     return (
-        <PokemonModalContext.Provider value={ value }>
+        <PokemonModalContext.Provider value={{ closeModal, currentPokemon, openModal, isModalOpen }}>
             { children }
         </PokemonModalContext.Provider>
     );
 };
+

@@ -1,6 +1,6 @@
 import { getTypeIconSrc } from '../../utils/pokemon-helper';
 import useTypes from '../../hooks/useTypes';
-
+import './style.scss';
 interface TypesBarProps {
     toggleType: (type: string) => void
 }
@@ -9,7 +9,6 @@ interface TypesBarProps {
 const TypesBar = (props:TypesBarProps) => {
     const {toggleType} = props;
     const types = useTypes();
-console.log('toggleType',toggleType);
 
     return (
         

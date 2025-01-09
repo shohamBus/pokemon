@@ -1,10 +1,11 @@
-import React from 'react';
-import { usePokemonModal } from '../../../context/PokemonModalProvider';
+import  { useContext } from 'react';
+import { PokemonModalContext, PokemonModalContextType } from '../../../context/PokemonModalProvider';
 import { getTypeIconSrc } from '../../../utils/pokemon-helper';
 import DataRow from '../DataRow';
 
 const About = () => {
-    const { currentPokemon } = usePokemonModal();
+    const { currentPokemon } = useContext(PokemonModalContext) as PokemonModalContextType;
+
     
     return (
         <>

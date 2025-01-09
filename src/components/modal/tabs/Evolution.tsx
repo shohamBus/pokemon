@@ -1,10 +1,10 @@
-import React from 'react';
-import { usePokemonModal } from '../../../context/PokemonModalProvider';
+import  { useContext } from 'react';
 import useEvolution from '../../../hooks/useEvolution';
+import { PokemonModalContext, PokemonModalContextType } from '../../../context/PokemonModalProvider';
 
 const Evolution = () => {
-    const { currentPokemon } = usePokemonModal();
-    const chain = useEvolution(currentPokemon.id);
+    const { currentPokemon } = useContext(PokemonModalContext) as PokemonModalContextType;
+    const chain = useEvolution(currentPokemon?.id || 0);
     
     return (
         <>
@@ -16,15 +16,15 @@ const Evolution = () => {
                         const { current, next } = evolution;
 
                         return (
-                            <div className='evolution-container' key={ next.name }>
+                            <div className='evolution-container' key={ next?.name }>
                                 <div>
                                     <div className='poke-img'>
                                         <div className='pokeball-bg'></div>
 
-                                        <img src={ current.image } alt='pokemon-image' />
+                                        <img src={ current?.image } alt='pokemon-image' />
                                     </div>
 
-                                    <span>{ current.name }</span>
+                                    <span>{ current?.name }</span>
                                 </div>
 
                                 <span className='arrow'></span>
@@ -33,10 +33,10 @@ const Evolution = () => {
                                     <div className='poke-img'>
                                         <div className='pokeball-bg'></div>
 
-                                        <img src={ next.image } alt='pokemon-image' />
+                                        <img src={ next?.image } alt='pokemon-image' />
                                     </div>
 
-                                    <span>{ next.name }</span>
+                                    <span>{ next?.name }</span>
                                 </div>
                             </div>
                         );

@@ -4,6 +4,7 @@ import { Loader } from './components/loader/Loader';
 import { PokemonModalProvider } from './context/PokemonModalProvider';
 import PokemonsContainer from './components/pokemonsContainer/PokemonsContainer';
 import TypesBar from './components/typesBar/TypesBar';
+import Modal from './components/modal/Modal';
 
 
 function App() {
@@ -14,12 +15,10 @@ function App() {
       <PokemonModalProvider>
           <div className='wrapper'>
             <h1 className='logo-pokemon'>Pokédex</h1>
-
             <TypesBar toggleType={ setType } />
             <PokemonsContainer type={ type } />
           </div>
-
-          {/* <Modal /> */}
+          <Modal />
       </PokemonModalProvider>
     </Suspense>
   )
