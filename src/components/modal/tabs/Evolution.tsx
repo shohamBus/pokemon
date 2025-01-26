@@ -1,6 +1,6 @@
+import { PokemonModalContext, PokemonModalContextType } from 'context/PokemonModalProvider';
+import useEvolution from 'hooks/useEvolution';
 import  React ,{ useContext } from 'react';
-import useEvolution from '../../../hooks/useEvolution';
-import { PokemonModalContext, PokemonModalContextType } from '../../../context/PokemonModalProvider';
 
 interface Evolution{
     name: string;

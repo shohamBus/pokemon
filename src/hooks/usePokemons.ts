@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "../utils/api-fetch";
-import { formatPokemonData } from "../utils/pokemon-helper";
+import { apiFetch } from "utils/api-fetch";
+import { formatPokemonData } from "utils/pokemon-helper";
 
 const usePokemons = (type:string) => {
     const { data } = useQuery({

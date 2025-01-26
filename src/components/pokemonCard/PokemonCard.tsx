@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { PokemonModalContext, PokemonModalContextType } from '../../context/PokemonModalProvider';
-import { getTypeIconSrc } from '../../utils/pokemon-helper';
-import { Pokemon } from '../../interface/pokemon';
+import React,{ useContext } from 'react';
+import { PokemonModalContext, PokemonModalContextType } from 'context/PokemonModalProvider';
+import { getTypeIconSrc } from 'utils/pokemon-helper';
+import { Pokemon } from 'interface/pokemon';
 import './style.scss';
 
 

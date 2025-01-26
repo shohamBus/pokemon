@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import './modal.scss';
 import IntroModal from '../introModal/IntroModal';
 import TabsContainer from '../tabsContainer/TabsContainer';
-import { PokemonModalContext, PokemonModalContextType } from '../../../context/PokemonModalProvider';
+import { PokemonModalContext, PokemonModalContextType } from 'context/PokemonModalProvider';
 
 
 const Modal = () => {

@@ -2,6 +2,7 @@ import PokemonCard from '../pokemonCard/PokemonCard';
 import usePokemons from '../../hooks/usePokemons';
 import './style.scss';
 import { Pokemon } from '../../interface/pokemon';
+import React from 'react';
 interface PokemonsContainerProps {
     type: string
 }
@@ -16,8 +17,6 @@ const PokemonsContainer = (props:PokemonsContainerProps) => {
         <div className='pokemons-container'>
             { pokemons?.map((pokemon:Pokemon) =>
             { 
-            console.log(pokemon)
-            
                 return <PokemonCard key={ pokemon.id } pokemon={ pokemon } />
 }) }
         </div>

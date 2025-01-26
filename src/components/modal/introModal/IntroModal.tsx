@@ -1,7 +1,7 @@
 import  React ,{ useContext } from 'react';
 import './IntroModal.scss'
-import { getTypeIconSrc } from '../../../utils/pokemon-helper';
-import { PokemonModalContext, PokemonModalContextType } from '../../../context/PokemonModalProvider';
+import { PokemonModalContext, PokemonModalContextType } from 'context/PokemonModalProvider';
+import { getTypeIconSrc } from 'utils/pokemon-helper';
 
 const IntroModal = () => {
     const { currentPokemon, closeModal } = useContext(PokemonModalContext) as PokemonModalContextType;

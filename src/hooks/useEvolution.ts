@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "../utils/api-fetch";
-import { normalizeEvolutionChain } from "../utils/pokemon-helper";
+import { apiFetch } from "utils/api-fetch";
+import { normalizeEvolutionChain } from "utils/pokemon-helper";
 
 const useEvolution = (id:number) => {
     const { data } = useQuery({

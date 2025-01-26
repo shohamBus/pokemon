@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "../utils/api-fetch";
+import { apiFetch } from "utils/api-fetch";
 
 const useTypes = () => {
     const { data } = useQuery({
