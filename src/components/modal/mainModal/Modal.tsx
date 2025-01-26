@@ -1,5 +1,5 @@
+import React ,{ useContext } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { useContext } from 'react';
 import './modal.scss';
 import IntroModal from '../introModal/IntroModal';
 import TabsContainer from '../tabsContainer/TabsContainer';
@@ -12,10 +12,9 @@ const Modal = () => {
     return (
         <Dialog.Root
             open={ isModalOpen }
-            onOpenChange={ (isOpen) => ! isOpen && closeModal() }
-        >
+            onOpenChange={ (isOpen) => ! isOpen && closeModal() }>
         <Dialog.Portal>
-          <Dialog.Overlay className='overlay' />
+        <Dialog.Overlay className='overlay' />
           <Dialog.Content
             className={ `modal ${ currentPokemon?.types[0]?.name }` }
             data-content={ currentPokemon?.name }

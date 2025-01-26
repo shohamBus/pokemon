@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React ,{ useContext } from "react";
 import { PokemonModalContext, PokemonModalContextType } from "../../../context/PokemonModalProvider";
 import { formatStats } from "../../../utils/pokemon-helper";
 import DataRow from "../dataRow/DataRow";

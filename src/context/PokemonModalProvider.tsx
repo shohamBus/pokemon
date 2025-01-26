@@ -1,9 +1,10 @@
+import { Pokemon } from 'interface/pokemon';
 import React, { useState } from 'react';
 
 export interface PokemonModalContextType {
     closeModal: () => void;
-    currentPokemon: any | null ;
-    openModal: (pokemon: any) => void;
+    currentPokemon: Pokemon | null ;
+    openModal: (pokemon: Pokemon) => void;
     isModalOpen: boolean;
 }
 
@@ -16,10 +17,10 @@ export const PokemonModalContext = React.createContext<PokemonModalContextType |
 // }
 
 export const PokemonModalProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-    const [modal, setModal] = useState<{ isOpen: boolean; pokemon: any | null }>({ isOpen: false, pokemon: null });
+    const [modal, setModal] = useState<{ isOpen: boolean; pokemon: Pokemon | null }>({ isOpen: false, pokemon: null });
     const closeModal = () => setModal((prev) => ({ ...prev, isOpen: false }));
     const currentPokemon = modal.pokemon;
-    const openModal = (pokemon: any) => setModal({ isOpen: true, pokemon: pokemon || null });
+    const openModal = (pokemon: Pokemon) => setModal({ isOpen: true, pokemon: pokemon || null });
     const isModalOpen = modal.isOpen;
 
 

@@ -417,30 +417,7 @@ td > img {
 
 
 
-td.range-slide {
-  width: 70%;
-  padding: 0;
-}
 
-.range-slide-fill {
-  position: relative;
-  height: 5px;
-  border-radius: 10px;
-  width: var(--precentage);
-}
-
-.range-slide-fill::after {
-  content: '';
-  position: absolute;
-  display: block;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  background: currentColor;
-  border-radius: 100px;
-  animation: fill 1s backwards;
-}
 
 @media screen and (min-width: 880px) {
   #root {
@@ -495,9 +472,7 @@ td.range-slide {
     width: 6px;
   }
 
-  .data-container .category {
-    padding: 0; 
-  }
+
 
   .evolution-container .poke-img {
     width: 10vw;

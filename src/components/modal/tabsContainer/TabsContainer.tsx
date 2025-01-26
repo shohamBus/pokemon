@@ -1,10 +1,10 @@
-import  { Suspense, useState } from 'react';
+import  React ,{ Suspense, useState } from 'react';
 
 import './TabsContainer.scss'
 import About from '../tabs/About';
 import Stats from '../tabs/Stats';
 import Evolution from '../tabs/Evolution';
-import { Loader } from '../../loader/Loader';
+import { Loader } from 'components/loader/Loader';
 
 const TabsContainer = () => {
     const tabs = [
@@ -33,7 +33,7 @@ const TabsContainer = () => {
             
             <div className='data-container'>
                 <Suspense fallback={ <Loader /> }>
-                    { tabs[currentTab].component }
+     { tabs[currentTab].component }
                 </Suspense>
             </div>
         </>

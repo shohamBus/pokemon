@@ -1,9 +1,10 @@
+import React from 'react';
 import './dataRow.scss'
 
 interface DataRowProps {
     catergory:string;
-    value:number;
-    max?:number;
+    value?:string;
+    max?:string;
 }
 
 const DataRow = (props:DataRowProps) => {
@@ -16,7 +17,7 @@ const DataRow = (props:DataRowProps) => {
             {
                 max &&
                 <td className="range-slide">
-                    <div className="range-slide-fill" style={{ "--precentage": (value / max) * 100 + '%' } as React.CSSProperties}></div>
+                    <div className="range-slide-fill" style={{ "--precentage": (Number(value) / Number(max)) * 100 + '%' } as React.CSSProperties}></div>
                 </td>
             }
         </tr>

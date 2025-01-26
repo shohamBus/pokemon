@@ -1,13 +1,15 @@
-import { logDOM } from "@testing-library/react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Pokemon } from "interface/pokemon";
+
 
 export const getTypeIconSrc = (type:string) => `./images/types-icons/${ type }.svg`;
 
 
-export const formatPokemonData = (pokemon: any) => {
+export const formatPokemonData = (pokemon: Pokemon) => {
     const { id, name, sprites, weight, height, types } = pokemon;
     
-    const weightInKg = (weight / 10 ) + 'kg';
-    const heightInMeter = (height / 10 ) + 'm';
+    const weightInKg = (Number(weight) / 10) + 'kg';
+    const heightInMeter = (Number(height) / 10 ) + 'm';
     const paddedId = String(id).padStart(3, '0');
     const formattedTypes = types.map(({ type }) => type);
     const pokemonImg = sprites.other.dream_world.front_default || sprites.other['official-artwork'].front_default ;
@@ -29,7 +31,7 @@ export const formatPokemonData = (pokemon: any) => {
  * @param {Array} stats - The stats array obtained from the API.
  * @returns {Array} - The formatted stats array.
  */
-export function formatStats(stats) {
+export function formatStats(stats:any) {
     
     const statsMaxValues = {
         hp: 714,
@@ -40,7 +42,7 @@ export function formatStats(stats) {
         speed: 504,
     }
 
-    const statsObject = stats.map(({ stat, base_stat }) => {
+    const statsObject = stats.map(({ stat, base_stat }: { stat: { name: keyof typeof statsMaxValues }, base_stat: number }) => {
 
         return {
             name: removeHyphens(stat.name),
@@ -49,7 +51,7 @@ export function formatStats(stats) {
         }
     });
 
-    const total = stats.reduce((total:number, { base_stat }) => total + base_stat, 0);
+    const total = stats.reduce((total:number, { base_stat }:{base_stat:any}) => total + base_stat, 0);
     
     return [
         ...statsObject,
@@ -57,14 +59,14 @@ export function formatStats(stats) {
     ];
 }
 
-export function normalizeEvolutionChain(evolutionChain) {
+export function normalizeEvolutionChain(evolutionChain:any) {
     const { species, evolves_to } = evolutionChain;
     
     if(! evolves_to.length) {
         return [];
     }
     
-    const evolutions = evolves_to.reduce((chain, evolution) => {
+    const evolutions = evolves_to.reduce((chain:any, evolution:any) => {
         return [
             ...chain,
             {
@@ -92,8 +94,9 @@ export function normalizeEvolutionChain(evolutionChain) {
  * @returns {string} - The image source of the Pokémon.
  */
 const getPokemonImage = (url:string) => {
-    const id = url.match(/\/(\d+)\//)[1] || 0; 
-    const isPokemonHasSvg = id < 650; 
+    const match = url.match(/\/(\d+)\//);
+    const id = match ? match[1] : 0;
+    const isPokemonHasSvg = Number(id) < 650; 
 
     const base = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other`;
     
