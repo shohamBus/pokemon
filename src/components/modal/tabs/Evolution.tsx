@@ -2,6 +2,18 @@ import  { useContext } from 'react';
 import useEvolution from '../../../hooks/useEvolution';
 import { PokemonModalContext, PokemonModalContextType } from '../../../context/PokemonModalProvider';
 
+interface Evolution{
+    name: string;
+    image: string;
+}
+
+ interface EvolutionChain {
+    current?: Evolution
+    next?: Evolution
+}
+
+
+
 const Evolution = () => {
     const { currentPokemon } = useContext(PokemonModalContext) as PokemonModalContextType;
     const chain = useEvolution(currentPokemon?.id || 0);
@@ -12,8 +24,9 @@ const Evolution = () => {
                     ! chain.length ?
                         <strong className='error-msg'>This Pokémon doesn't Evolve</strong>
                     :
-                    chain.map((evolution) => {
+                    chain.map((evolution: EvolutionChain) => {
                         const { current, next } = evolution;
+                    
 
                         return (
                             <div className='evolution-container' key={ next?.name }>

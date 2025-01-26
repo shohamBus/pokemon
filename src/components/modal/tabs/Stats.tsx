@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { PokemonModalContext, PokemonModalContextType } from "../../../context/PokemonModalProvider";
 import { formatStats } from "../../../utils/pokemon-helper";
-import DataRow from "../DataRow";
+import DataRow from "../dataRow/DataRow";
 
 const Stats = () => {
     const { currentPokemon } = useContext(PokemonModalContext) as PokemonModalContextType;

@@ -1,0 +1,77 @@
+/* Modal */
+.modal {
+    --main-padding: 6vw 6vw 0 6vw;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px;
+    background: currentColor;
+    overflow: hidden;
+  }
+  
+  .modal[data-state='open'] {
+    animation: unfoldIn .8s ease-in-out;
+  }
+  
+  .modal[data-state='closed'] {
+    animation: unfoldOut .7s ease-in-out;
+  }
+  
+  .modal::before {
+    content: attr(data-content);
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 18vw;
+    font-weight: 800;
+    text-transform: uppercase;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.20);
+    z-index: -1;
+  }
+  
+  .modal::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: 0;
+    width: 25%;
+    height: 12%;
+    background: radial-gradient(rgba(255, 255, 255, 0.1) 2px, #000 2px, transparent 0);
+    background-size: 14px 14px;
+    z-index: -1;
+  }
+
+  @keyframes unfoldIn {
+    0% {
+      transform: translate(-50%, 0%) scaleY(.005) scaleX(0);
+    }
+  }
+  
+  @keyframes unfoldOut {
+    100% {
+      transform: translate(-50%, 0%) scaleY(.005) scaleX(0);
+    }
+  }
+
+  @media screen and (min-width: 880px) {
+    .modal {
+      --main-padding: 3vw 3vw 0 3vw;
+      width: 60%;
+    }
+  
+    .modal::before {
+      top: 2%;
+      font-size: 10vw;
+    }
+  
+    
+    .modal nav button {
+      padding: 1.5vw 2.8vw;
+    }
+  }
+  

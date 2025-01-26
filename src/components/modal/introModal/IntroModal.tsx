@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
-import { getTypeIconSrc } from '../../utils/pokemon-helper';
-import { PokemonModalContext, PokemonModalContextType } from '../../context/PokemonModalProvider';
+import  { useContext } from 'react';
+import './IntroModal.scss'
+import { getTypeIconSrc } from '../../../utils/pokemon-helper';
+import { PokemonModalContext, PokemonModalContextType } from '../../../context/PokemonModalProvider';
 
 const IntroModal = () => {
     const { currentPokemon, closeModal } = useContext(PokemonModalContext) as PokemonModalContextType;
@@ -21,15 +22,12 @@ const IntroModal = () => {
 
                     <div className='types'>
                         {
-                            currentPokemon.types.map(({ name }) => {
-                                console.log(name);
-                                
-                                const typeImg = getTypeIconSrc(name)
-
+                            currentPokemon.types.map(({ name }: { name: string }) => {
+                                const typeImg = getTypeIconSrc(name);
                                 return (
-                                    <div key={ name } className={ name }>
-                                        <img src={ typeImg } alt={ name } />
-                                        <span className='type-name'>{ name }</span>
+                                    <div key={name} className={name}>
+                                        <img src={typeImg} alt={name} />
+                                        <span className='type-name'>{name}</span>
                                     </div>
                                 );
                             })

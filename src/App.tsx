@@ -4,7 +4,7 @@ import { Loader } from './components/loader/Loader';
 import { PokemonModalProvider } from './context/PokemonModalProvider';
 import PokemonsContainer from './components/pokemonsContainer/PokemonsContainer';
 import TypesBar from './components/typesBar/TypesBar';
-import Modal from './components/modal/Modal';
+import Modal from './components/modal/mainModal/Modal';
 
 
 function App() {

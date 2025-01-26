@@ -1,18 +1,13 @@
 import { useContext } from 'react';
 import { PokemonModalContext, PokemonModalContextType } from '../../context/PokemonModalProvider';
 import { getTypeIconSrc } from '../../utils/pokemon-helper';
+import { Pokemon } from '../../interface/pokemon';
+import './style.scss';
 
-interface Pokemon {
-    paddedId: string;
-    name: string;
-    types: { name: string }[];
-    imgSrc: string;
-}
 
 interface PokemonCardProps {
     pokemon: Pokemon;
 }
-
 
 const PokemonCard = (props:PokemonCardProps) => {
     const { pokemon } = props;
@@ -30,7 +25,6 @@ const PokemonCard = (props:PokemonCardProps) => {
                     {
                        pokemon.types.map(({ name }) => {
                             const typeImg = getTypeIconSrc(name);
-                            
                             return (
                                 <div key={ name } className={ name }>
                                     <img src={ typeImg } alt={ name } />

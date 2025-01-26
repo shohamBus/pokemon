@@ -1,8 +1,10 @@
 import  { Suspense, useState } from 'react';
-import Evolution from './tabs/Evolution';
-import About from './tabs/About';
-import Stats from './tabs/Stats';
-import { Loader } from '../loader/Loader';
+
+import './TabsContainer.scss'
+import About from '../tabs/About';
+import Stats from '../tabs/Stats';
+import Evolution from '../tabs/Evolution';
+import { Loader } from '../../loader/Loader';
 
 const TabsContainer = () => {
     const tabs = [

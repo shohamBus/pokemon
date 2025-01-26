@@ -1,7 +1,11 @@
 import  { useContext } from 'react';
 import { PokemonModalContext, PokemonModalContextType } from '../../../context/PokemonModalProvider';
 import { getTypeIconSrc } from '../../../utils/pokemon-helper';
-import DataRow from '../DataRow';
+import DataRow from '../dataRow/DataRow';
+
+export interface Ability {
+    name: string;
+}
 
 const About = () => {
     const { currentPokemon } = useContext(PokemonModalContext) as PokemonModalContextType;
@@ -9,7 +13,7 @@ const About = () => {
     
     return (
         <>
-            <h4>Pokédex Data</h4>
+            <h4>Pokemon Data</h4>
                 
             <table>
                 <tbody>
@@ -21,7 +25,7 @@ const About = () => {
                         <td>
                             <ol>
                                 {
-                                    currentPokemon.abilities.map(({ ability, is_hidden }) => {
+                                    currentPokemon.abilities.map(({ ability, is_hidden }:{ability:Ability,is_hidden:boolean}) => {
                                         if(is_hidden) {
                                             return <small key={ ability.name }>{ ability.name } (hidden ability)</small>
                                         }
@@ -37,7 +41,7 @@ const About = () => {
                         <td className='category'>Types</td>
                         <td>
                             {
-                                currentPokemon.types.map(({ name }) => {
+                                currentPokemon.types.map(({ name }:{ name:string}) => {
                                     const typeImage = getTypeIconSrc(name);
 
                                     return <img key={ name } className={ name } src={ typeImage } alt={ name } />

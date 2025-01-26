@@ -1,0 +1,54 @@
+.data-container .category {
+    padding: 0; 
+  }
+.category {
+    padding: 0 10vw 0 0;
+    font-weight: 600;
+    color: #0000ec;
+    text-transform: capitalize;
+  }
+  table {
+    width: 100%;
+    border-spacing: 0 1.1vh;
+  }
+  
+   td {
+    padding: 0 3vw;
+  }
+  
+  .category {
+    padding: 0 10vw 0 0;
+    font-weight: 600;
+    color: #3d3d40;
+    text-transform: capitalize;
+  }
+  
+   td:nth-child(2) {
+    color: #7d7d7d;
+  }
+
+  td.range-slide {
+    width: 70%;
+    padding: 0;
+  }
+  
+  .range-slide-fill {
+    position: relative;
+    height: 5px;
+    border-radius: 10px;
+    width: var(--precentage);
+  }
+  
+  .range-slide-fill::after {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: currentColor;
+    border-radius: 100px;
+    animation: fill 1s backwards;
+  }
+
