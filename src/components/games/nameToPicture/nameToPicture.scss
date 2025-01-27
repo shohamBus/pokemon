@@ -1,0 +1,41 @@
+.name-page-section{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    .cards-section{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    .card {
+        background: currentColor;
+        width: 200px;
+        height: 200px;
+        border-radius: 15px;
+        background-color: lin;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: transform 0.2s;
+        box-shadow: 0 15px 40px 0 currentColor;
+        &:hover {
+            transform: scale(1.05);
+        }
+        margin: 10px;
+        .text-card{
+            margin: 40px ;
+            color: #000;
+            font-weight: 600;
+            font-size: min(30px, 2.5vw);
+            text-align: center;
+            text-overflow: ellipsis;
+        }
+       .image-card{
+            width: 80%;
+            height: 80%;
+       }
+    }
+    }
+}

@@ -18,6 +18,26 @@ a {
   cursor: pointer;
 }
 
+.button-play{
+  display: flex;
+  width: 50%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px auto;
+  background: #eef5fd;
+  border-radius: 10vw;
+  box-shadow: 0 0 10px 5px #b4b3b3;
+  font-size:30px;
+  color: #000;
+  &:hover {
+    border: none;
+    transform: scale(1.1);
+    transition: transform .10s;
+    box-shadow: 0 0 10px 5px #d5d5d5;
+  }
+}
+
 .loader:not(.data-container .loader) {
   position: absolute;
   top: 50%;

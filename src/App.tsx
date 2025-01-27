@@ -1,26 +1,25 @@
-import React, { Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import './App.scss';
-import { Loader } from 'components/loader/Loader';
 import { PokemonModalProvider } from 'context/PokemonModalProvider';
 import PokemonsContainer from 'components/pokemonsContainer/PokemonsContainer';
 import TypesBar from 'components/typesBar/TypesBar';
 import Modal from 'components/modal/mainModal/Modal';
+import { Link } from 'react-router-dom';
 
 
 function App() {
   const [type, setType] = useState('ice');
 
   return (
-    <Suspense fallback={<Loader />}>
        <PokemonModalProvider>
         <div className='wrapper'>
-        <h1 className='logo-pokemon'>Pokémon</h1>
+        <h1 className='logo-pokemon'>Let's get to know the   Pokémon</h1>
           <TypesBar toggleType={setType} />
-       <PokemonsContainer type={type} />
+        <Link className='button-play' to="/game"><span style={{}} >Let's play</span></Link>
+         <PokemonsContainer type={type} />
         </div>
         <Modal />
       </PokemonModalProvider>
-    </Suspense>
   )
 }
 

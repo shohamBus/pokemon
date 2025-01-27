@@ -12,6 +12,7 @@ interface PokemonCardProps {
 const PokemonCard = (props:PokemonCardProps) => {
     const { pokemon } = props;
     const { openModal } = useContext(PokemonModalContext) as PokemonModalContextType;
+    
     return (
         <div
             onClick={ () => openModal(pokemon) }
