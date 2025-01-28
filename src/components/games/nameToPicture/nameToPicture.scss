@@ -1,56 +1,51 @@
-.name-page-section{
-    display: flex;
-    justify-content: space-around;
-    gap: 10px;
-    .count{
-        font-size: 20px;
-        font-weight: 600;
-        color: #000;
+h1 {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  color: currentColor;
+  transition: all 0.4s ease 0s;
+}
+
+.header {
+  margin: 20px;
+  h1 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 160px;
+    text-align: center;
+    margin: auto;
+    white-space: nowrap;
+    padding-bottom: 13px;
+
+    &:before {
+      background-color: #000;
+      content: '';
+      display: block;
+      height: 3px;
+      width: 80px;
+      margin-bottom: 5px;
     }
-    .cards-section{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    .card {
-        background: currentColor;
-        width: 200px;
-        height: 200px;
-        border-radius: 15px;
-        background-color: lin;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        border-radius: 8px;
-        transition: transform 0.2s;
-        box-shadow: 0 15px 40px 0 currentColor;
-        &:hover {
-            transform: scale(1.05);
-        }
-        margin: 10px;
-        .text-card{
-            margin: 40px ;
-            color: #000;
-            font-weight: 600;
-            font-size: min(30px, 2.5vw);
-            text-align: center;
-            text-overflow: ellipsis;
-        }
-        .selected {
-         background: yellow;
-         border-radius: 15px;
-         transform: scale(1.05);
-      }
-       .image-card{
-            width: 80%;
-            height: 80%;
-       }
-       .matched {
-            background-color: green;
-            border-radius: 15px;
-            transform: scale(1.05);
-        }
+
+    &:after {
+      background-color: #000;
+      content: '';
+      display: block;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      width: 80px;
+      margin-bottom: 0.25em;
     }
-    }
+  }
+
+  h3 {
+    margin: 0 auto;
+    text-align: center;
+  }
 }

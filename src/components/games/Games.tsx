@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NameToPicture } from './nameToPicture/NameToPicture'
 import './games.scss'
+import { PokemonModalContext, PokemonModalContextType } from 'context/PokemonModalProvider';
+import { Link } from 'react-router-dom';
 
 export const Games = () => {
+  const { type } = useContext(PokemonModalContext) as PokemonModalContextType;
   return (
     <div>
-        <div className='go-back-section'>
-        <a
-                className='arrow-back'
-                onClick={ () => window.history.back() }
-            />
-            <span className='go-back'>Go Back</span>
-            </div>
-            <NameToPicture type='ice'/>
-    </div>
+    <Link to={`/`} className='go-back-section'>
+      <div className='arrow-back' />
+      <span className='go-back'>Go Back</span>
+    </Link>
+    <NameToPicture type={type} />
+  </div>
   )
 }

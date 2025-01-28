@@ -1,22 +1,21 @@
 import { getTypeIconSrc } from '../../utils/pokemon-helper';
+import { PokemonModalContext, PokemonModalContextType } from 'context/PokemonModalProvider';
 import useTypes from '../../hooks/useTypes';
 import './style.scss';
-import React from 'react';
-interface TypesBarProps {
-    toggleType: (type: string) => void
-}
+import React, { useContext } from 'react';
 
 
-const TypesBar = (props:TypesBarProps) => {
-    const {toggleType} = props;
+
+const TypesBar = () => {
     const types = useTypes();
-
+    const { toggleType } = useContext(PokemonModalContext) as PokemonModalContextType;
     return (
         
         <nav className='types-bar'>
             {
             types?.map((type: { name: string }) => {
                 const typeImg = getTypeIconSrc(type.name);
+                
                 return (
                      type.name!=='stellar' &&
                 <a

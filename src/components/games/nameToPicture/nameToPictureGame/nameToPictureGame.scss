@@ -1,0 +1,169 @@
+
+.big-title-success {
+  font-size: 2em;
+  color: green;
+  text-align: center;
+  margin: 20px 0;
+  animation: successAnimation 1s ease-in-out;
+}
+
+.big-title-failed {
+  font-size: 2em;
+  color: rgb(246, 10, 22);
+  text-align: center;
+  margin: 20px 0;
+  animation: failedAnimation 1s ease-in-out;
+}
+
+@keyframes successAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes failedAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.count-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .count-box{
+        width: 150px;
+        border: 2px solid #807979;
+        box-shadow: 2px 2px 5px #696464;
+        border-radius: 15px;
+        padding: 10px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @keyframes countChange {
+            0% {
+              transform: scale(1);
+            }
+            50% {
+              transform: scale(1.5);
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+          
+          .animate {
+            animation: countChange 0.5s ease-in-out;
+          }
+    }
+}
+
+.name-page-section{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+   
+    .cards-section{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    .card {
+        background: currentColor;
+        width: 200px;
+        height: 200px;
+        border-radius: 15px;
+        background-color: lin;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: transform 0.2s;
+        box-shadow: 0 15px 40px 0 currentColor;
+       
+        .selected {
+            background: yellow;
+            border-radius: 15px;
+            transform: scale(1.05);
+         }
+         .matched {
+            background-color: green;
+            border-radius: 15px;
+            transform: scale(1.05);
+        }
+        &:hover {
+            transform: scale(1.05);
+        }
+        margin: 10px;
+        .text-card{
+            margin: 40px ;
+            color: #000;
+            font-weight: 600;
+            font-size: min(30px, 2.5vw);
+            text-align: center;
+            text-overflow: ellipsis;
+        }
+    
+       .image-card{
+            width: 80%;
+            height: 80%;
+       }
+     
+    }
+    .selected {
+        background: rgb(219,222,18);
+        background: radial-gradient(circle, rgba(219,222,18,1) 30%, rgba(138,253,45,1) 100%);
+        border-radius: 15px;
+        transform: scale(1.05);
+        transition: background 0.9s ease-in-out;
+        background-size: 200% 200%;
+        background-position: center;
+    }
+    .matched {
+        background: rgb(90,195,34);
+        background: radial-gradient(circle, rgba(90,195,34,1) 25%, rgba(45,253,148,1) 100%);
+        border-radius: 15px;
+        transform: scale(1.05);
+        transition: background 0.9s ease-in-out;
+        background-size: 200% 200%;
+        background-position: center;
+    }
+    }
+}
+.pokeball-bg-card {
+  position: relative;
+  right: 0;
+  width: 35%;
+  height: 100%;
+  
+  &::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 105%;
+  transform: translate(0, -50%);
+  background: rgba(255, 255, 255, 0.11);
+  mask: url("/images/pokeball-transparent.svg");
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  -webkit-mask: url("/images/pokeball-transparent.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+}
+}

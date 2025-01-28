@@ -1,0 +1,33 @@
+.stage-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    .stage{
+        background: currentColor;
+        display: flex;
+        width: 30%;
+        padding: 1vw 2vw;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 30px auto;
+        gap: 15px;
+        border-radius: 10vw;
+        &.pass{
+            box-shadow: 0 0 10px 5px #06f306;
+        }
+        &.active{
+            box-shadow: 0 0 10px 5px #eaebea;
+        }
+        &.disable{
+            box-shadow: 0 0 20px 15px #cc3c3c;
+            background: rgb(133, 124, 124);
+        }
+        .stage-text{
+            font-size: 1.5vw;
+            color: #000;
+        }
+    }
+}
