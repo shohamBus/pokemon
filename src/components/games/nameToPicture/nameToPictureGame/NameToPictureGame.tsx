@@ -1,10 +1,12 @@
-import usePokemons from 'hooks/usePokemons';
 import React, { useEffect, useMemo, useState } from 'react'
 import './nameToPictureGame.scss';
+import { EMPTY_STRING } from 'utils/constants';
+import { Pokemon } from 'interface/pokemon';
 
 interface NameToPictureGameProps{
   type:string
   stage:number
+  pokemons:Pokemon[]
   setStage:React.Dispatch<React.SetStateAction<number>>
 }
 
@@ -13,10 +15,10 @@ interface Card {
   img: string;
   bg: string;
 }
-export const NameToPictureGame = (props:NameToPictureGameProps) => {
-  const {type, stage,setStage }=props;
 
-  const pokemons = usePokemons(type || 'fighting');
+export const NameToPictureGame = (props:NameToPictureGameProps) => {
+  const {type, stage,setStage, pokemons }=props;
+
   const pokemonsForTheGame = useMemo(() => {
     let numberOfPokemons;
     if (stage === 1) {
@@ -27,7 +29,7 @@ export const NameToPictureGame = (props:NameToPictureGameProps) => {
       numberOfPokemons = 12;
     }
     return pokemons?.sort(() => Math.random() - 0.5).slice(0, numberOfPokemons);
-  }, [pokemons, stage]);
+  }, [stage,type]);
   
   const resSet = useMemo(() => new Set(), []);
   const maxAttempts = useMemo(() => {
@@ -36,8 +38,8 @@ export const NameToPictureGame = (props:NameToPictureGameProps) => {
     return 18;
   }, [stage]);
 
-  const [selectCardName, setSelectCardName] = useState<string | undefined>(undefined);
-  const [selectCardImg, setSelectCardImg] = useState<string | undefined>(undefined);
+  const [selectedCards, setSelectedCards] = useState<{ name?: string; image?: string }>({ name: undefined, image: undefined });
+
   const [attempts, setAttempts] = useState<[number, boolean]>([0, false]);
   const [cards, setCards] = useState<{ name: string; img: string, bg: string }[]>([]);
   const [showTitle, setShowTitle] = useState<boolean>(false);
@@ -66,13 +68,12 @@ export const NameToPictureGame = (props:NameToPictureGameProps) => {
   }, [pokemonsForTheGame, resSet]);
 
   useEffect(() => {
-    if (selectCardName && selectCardImg) {
-      if (selectCardName === selectCardImg) {
-        resSet.add(selectCardName)
+    if (selectedCards.name && selectedCards.image) {
+      if (selectedCards.name === selectedCards.image) {
+        resSet.add(selectedCards.name)
       }
       setTimeout(() => {
-        setSelectCardImg(undefined);
-        setSelectCardName(undefined);
+        setSelectedCards({ name: undefined, image: undefined });
       }, 1000);
       if (resSet.size === pokemonsForTheGame?.length) {
         setShowTitle(true);
@@ -91,44 +92,56 @@ export const NameToPictureGame = (props:NameToPictureGameProps) => {
             setShowMaxAttemptsTitle(false);
             setAttempts([0, false]);
             resSet.clear();
-            setSelectCardName(undefined);
-            setSelectCardImg(undefined);
+            setSelectedCards({ name: undefined, image: undefined });
           }, 2000); 
         }
         return newAttempts;
       });
     }
-  }, [selectCardName, selectCardImg, resSet, cards, setStage, pokemonsForTheGame, maxAttempts, cardsForName]);
+  }, [resSet, cards, setStage, pokemonsForTheGame, maxAttempts, cardsForName, selectedCards]);
 
+    const getCardStyle=(name: string, check?: string)=>{
+      const checkName=check || undefined;
+     return  `card ${type} pokeball-bg-card ${checkName  === name ? 'selected' : resSet.has(name) ? 'matched' : EMPTY_STRING}`
+    }
+
+    const renderTitels=()=>{
+      return (
+        <>
+          {showTitle && stage !== 3 && <div className="big-title-success">Well done! Let's progress to stage {stage + 1}</div>}
+          {showTitle && stage === 3 && 
+            <div className="big-title-success">
+              Well done! You Are the king of the {type} world, Try another world
+            </div>
+          }
+          {(showMaxAttemptsTitle && !showTitle) && <div className="big-title-failed">You failed, no worries. Let's try again!</div>}
+        </>
+      );
+    }
 
   return (
     <div>
-      {showTitle && stage!==3 && <div className="big-title-success">Well done! Let's progress to stage {stage + 1}</div>}
-      {showTitle && stage===3 && 
-      <div className="big-title-success">
-        Well done! You Are the king of the {type} world, Try another world
-      </div>}
-      {showMaxAttemptsTitle && <div className="big-title-failed">You failed, no worries. Let's try again!</div>}
+      {renderTitels()}
     <div className='count-section'>
     <div className='count-box'>
       <div>Count</div>
-      <span className={`${(selectCardName===selectCardImg&&selectCardImg!==undefined)   ? 'animate' : ''}`}>{resSet.size}/{cards.length}</span>
+      <span className={`${(selectedCards.name===selectedCards.image&&selectedCards.image!==undefined)   ? 'animate' : EMPTY_STRING}`}>{resSet.size}/{cards.length}</span>
     </div>
     <div className='count-box'>
       <div>Attempts</div>
-      <span className={`attempts ${attempts[1] ? 'animate' : ''}`} onAnimationEnd={() => setAttempts([attempts[0], false])}>{attempts[0]}/{maxAttempts}</span>
+      <span className={`attempts ${attempts[1] ? 'animate' : EMPTY_STRING}`} onAnimationEnd={() => setAttempts([attempts[0], false])}>{attempts[0]}/{maxAttempts}</span>
     </div>
   </div>
     <div className="name-page-section">
       <div className='cards-section'>
         {cardsForName?.map((card, index) => (
-          <div onClick={() =>(!selectCardName  && !resSet.has(card.name)) && setSelectCardName(card.name)}  key={`name-${index}`} className={`card ${type} pokeball-bg-card ${selectCardName === card.name ? 'selected' : resSet.has(card.name) ? 'matched' : ''}`}>
+          <div onClick={() =>(!selectedCards.name  && !resSet.has(card.name)) &&  setSelectedCards((prev)=>({...prev, name: card.name}))}  key={`name-${index}`} className={getCardStyle(card.name, selectedCards.name)}>
             <span className={`text-card `}>{card.name}</span></div>
         ))}
       </div>
       <div className='cards-section'>
         {cardsForImage?.map((card, index) => (
-          <div onClick={() => (!selectCardImg && !resSet.has(card.name)) && setSelectCardImg(card.name) } key={`img-${index}`} className={`card ${type} pokeball-bg-card ${selectCardImg === card.name ? 'selected' : resSet.has(card.name) ? 'matched' : ''}`}>
+          <div onClick={() => (!selectedCards.image  && !resSet.has(card.name)) && setSelectedCards((prev)=>({...prev, image: card.name}))} key={`img-${index}`} className={getCardStyle(card.name,selectedCards.image)}>
             <img src={card.img} alt={card.name} className={`image-card `} />
           </div>
         ))}

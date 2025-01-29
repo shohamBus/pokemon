@@ -1,3 +1,55 @@
+.game-container{
+  width: 100%;
+  h1 {
+    position: relative;
+    padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  color: currentColor;
+  transition: all 0.4s ease 0s;
+}
+.header {
+  margin: 20px;
+  h1 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 160px;
+    text-align: center;
+    margin: auto;
+    white-space: nowrap;
+    padding-bottom: 13px;
+    
+    &:before {
+      background-color: #000;
+      content: '';
+      display: block;
+      height: 3px;
+      width: 80px;
+      margin-bottom: 5px;
+    }
+    
+    &:after {
+      background-color: #000;
+      content: '';
+      display: block;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      width: 80px;
+      margin-bottom: 0.25em;
+    }
+  }
+  
+  h3 {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
 .go-back-section {
   cursor: pointer;
   color: #000;
@@ -58,4 +110,33 @@
     font-weight: bold;
     transition: color 0.3s ease;
   }
+}
+}
+.wrapper-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
+.button-play{
+  display: flex;
+  width: 40%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: #eef5fd;
+  border-radius: 10vw;
+  box-shadow: 0 0 10px 5px #b4b3b3;
+  font-size:30px;
+  color: #000;
+  &:hover {
+    border: none;
+    transform: scale(1.1);
+    transition: transform .10s;
+    box-shadow: 0 0 10px 5px #d5d5d5;
+  }
+  
+}
 }

@@ -1,0 +1,45 @@
+.bulk-container{
+    display: flex;
+    flex-wrap: wrap;
+justify-content: space-between;
+    .name-list{
+        width: 30%;
+        h2{
+            color: #000;
+            font-size: 1.5rem;
+            text-decoration: underline;
+        }
+        .pokemon-name{
+            color: #000;
+            font-size: larger;
+        }
+    }
+    
+    .bulk {
+      display: grid;
+      grid-template-columns: repeat(10, 50px); 
+      width: 60%;
+    margin-bottom: 40px;
+    .bulk-cell {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ccc;
+      font-size: 18px;
+      color: #000;
+      font-weight: bold;
+      background-color: #fff; 
+    }
+    .bulk-cell.selected {
+      background-color: #ffeb3b; /* Highlight selected cells */
+    }
+    
+    .pokemon-name.found {
+      text-decoration: line-through; /* Strike through found words */
+    }
+
+}
+
+}
