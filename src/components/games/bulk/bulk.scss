@@ -1,7 +1,7 @@
 .bulk-container{
     display: flex;
     flex-wrap: wrap;
-justify-content: space-between;
+    justify-content: space-between;
     .name-list{
         width: 30%;
         h2{
@@ -12,7 +12,11 @@ justify-content: space-between;
         .pokemon-name{
             color: #000;
             font-size: larger;
+        &.found {
+          text-decoration: line-through;
         }
+      }
+      
     }
     
     .bulk {
@@ -33,13 +37,12 @@ justify-content: space-between;
       background-color: #fff; 
     }
     .bulk-cell.selected {
-      background-color: #ffeb3b; /* Highlight selected cells */
+      background-color: #ffeb3b; 
+    }
+    .bulk-cell.found {
+      background-color: #0daf38; 
     }
     
-    .pokemon-name.found {
-      text-decoration: line-through; /* Strike through found words */
-    }
-
 }
 
 }

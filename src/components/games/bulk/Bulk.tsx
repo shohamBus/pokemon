@@ -1,29 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './Bulk.scss';
+import { Pokemon } from 'interface/pokemon';
 
-interface Pokemon {
-  name: string;
-}
+
 
 interface BulkProps {
   pokemons: Pokemon[];
 }
 
 const Bulk: React.FC<BulkProps> = ({ pokemons }) => {
+  
   const [grid, setGrid] = useState<string[][]>([]);
   const [selectedCells, setSelectedCells] = useState<{ row: number; col: number }[]>([]);
-  const [foundWords, setFoundWords] = useState<string[]>([]);
-
+  const foundWords = useMemo(() => new Set<string>(), []);
+  const [foundCells, setFoundCells] = useState<{ row: number; col: number }[]>([]);
+  interface TransformedPokemon {
+    name: string;
+    bulkName:string;
+    img: string;
+    bg: string;
+  }
+  const pokemonsForTheGame: TransformedPokemon[] = useMemo(() => pokemons?.sort(() => Math.random() - 0.5).slice(0, 1).map((pokemon) => {
+    return { name: pokemon.name, bulkName: pokemon.name.split(' ').join(''), img: pokemon.imgSrc, bg: pokemon.types[0].name };
+  }), []);
+  
   useEffect(() => {
-    const randomPokemons = getRandomPokemons(pokemons, 10);
-    const newGrid = generateGrid(10, 10, randomPokemons.map(p => p.name.toLowerCase()));
+    const randomPokemons = getRandomPokemons(pokemonsForTheGame, 10);
+    const newGrid = generateGrid(10, 10, randomPokemons.map(p => p.name.replace(/\s+/g, '').toLowerCase()));
     setGrid(newGrid);
-  }, [pokemons]);
+    setFoundCells([]);
+    console.log(generateGrid(10, 10, randomPokemons.map(p => p.name.toLowerCase())));
 
-  const getRandomPokemons = (pokemons: Pokemon[], count: number) => {
-    return pokemons.sort(() => 0.5 - Math.random()).slice(0, count);
+  }, []); 
+  
+  const getRandomPokemons = (pokemonsForTheGame: TransformedPokemon[], count: number) => {
+    return pokemonsForTheGame.sort(() => 0.5 - Math.random()).slice(0, count);
   };
-
+  console.log(pokemonsForTheGame);
+  
   const generateGrid = (rows: number, cols: number, words: string[]) => {
     const grid = Array.from({ length: rows }, () => Array(cols).fill(''));
     const directions = [
@@ -32,23 +46,23 @@ const Bulk: React.FC<BulkProps> = ({ pokemons }) => {
       { x: 1, y: 1 }, // diagonal down-right
       { x: 1, y: -1 }, // diagonal down-left
     ];
-
+    
     const placeWord = (word: string) => {
       const maxAttempts = 100; // Maximum number of attempts to place a word
       let attempts = 0;
       let placed = false;
-
+      
       while (!placed && attempts < maxAttempts) {
         const direction = directions[Math.floor(Math.random() * directions.length)];
         const reverse = Math.random() > 0.5;
         if (reverse) word = word.split('').reverse().join('');
-
+        
         const startX = Math.floor(Math.random() * rows);
         const startY = Math.floor(Math.random() * cols);
         let x = startX;
         let y = startY;
         let fits = true;
-
+        
         for (let i = 0; i < word.length; i++) {
           if (x < 0 || x >= rows || y < 0 || y >= cols || (grid[x][y] !== '' && grid[x][y] !== word[i])) {
             fits = false;
@@ -57,7 +71,7 @@ const Bulk: React.FC<BulkProps> = ({ pokemons }) => {
           x += direction.x;
           y += direction.y;
         }
-
+        
         if (fits) {
           x = startX;
           y = startY;
@@ -68,54 +82,62 @@ const Bulk: React.FC<BulkProps> = ({ pokemons }) => {
           }
           placed = true;
         }
-
+        
         attempts++;
       }
-
+      
       if (!placed) {
         console.warn(`Could not place word: ${word}`);
       }
     };
-
+    
     words.forEach(word => placeWord(word));
-
+    
     // Fill remaining empty spaces with random lowercase letters
     // for (let i = 0; i < rows; i++) {
-    //   for (let j = 0; j < cols; j++) {
-    //     if (grid[i][j] === '') {
-    //       grid[i][j] = String.fromCharCode(97 + Math.floor(Math.random() * 26)); // 'a' is 97 in ASCII
-    //     }
-    //   }
-    // }
+      //   for (let j = 0; j < cols; j++) {
+        //     if (grid[i][j] === '') {
+          //       grid[i][j] = String.fromCharCode(97 + Math.floor(Math.random() * 26)); // 'a' is 97 in ASCII
+          //     }
+          //   }
+          // }
+          
+          return grid;
+        };
 
-    return grid;
-  };
-
-  const handleCellClick = (row: number, col: number) => {
+  const handleCellClick = (row: number, col: number,e:any) => {
+    console.log(e.target.innerText);
+    
     setSelectedCells([...selectedCells, { row, col }]);
   };
 
   useEffect(() => {
     if (selectedCells.length > 1) {
       const selectedWord = selectedCells.map(cell => grid[cell.row][cell.col]).join('');
-      const reversedSelectedWord = selectedWord.split('').reverse().join('');
-      const words = pokemons.map(p => p.name.toLowerCase());
-
-      if (words.includes(selectedWord) || words.includes(reversedSelectedWord)) {
-        setFoundWords([...foundWords, selectedWord]);
+      const words = pokemonsForTheGame.map(p => p.name.toLowerCase());
+        console.log('foundCells',foundCells)
+        console.log('selectedCells',selectedCells)
+      if (words.some(word => word.startsWith(selectedWord))) {
+        if (words.includes(selectedWord)) {
+          foundWords.add(selectedWord);
+          setFoundCells([...foundCells, ...selectedCells]);
+          setSelectedCells([]);
+        }
+      } else {
+        setSelectedCells([]);
       }
 
-      setSelectedCells([]);
+   
     }
-  }, [selectedCells, grid, pokemons, foundWords]);
+  }, [selectedCells, grid, pokemonsForTheGame, foundWords]);
 
   return (
     <div className='bulk-container'>
       <div className='name-list'>
         <h2>Random Pokemons</h2>
         <ol>
-          {pokemons.slice(0, 10).map((pokemon, index) => (
-            <li key={index} className={`pokemon-name ${foundWords.includes(pokemon.name.toLowerCase()) ? 'found' : ''}`}>
+          {pokemonsForTheGame.slice(0, 10).map((pokemon, index) => (
+            <li key={index} className={`pokemon-name ${foundWords.has(pokemon.name) ? 'found' : ''}`}>
               {pokemon.name.toLowerCase()}
             </li>
           ))}
@@ -127,8 +149,8 @@ const Bulk: React.FC<BulkProps> = ({ pokemons }) => {
             {row.map((cell, cellIndex) => (
               <span
                 key={cellIndex}
-                className={`bulk-cell ${selectedCells.some(selected => selected.row === rowIndex && selected.col === cellIndex) ? 'selected' : ''}`}
-                onClick={() => handleCellClick(rowIndex, cellIndex)}
+                className={`bulk-cell ${foundCells.some(found => found.row === rowIndex && found.col === cellIndex) ? 'found' : ''} ${selectedCells.some(selected => selected.row === rowIndex && selected.col === cellIndex) ? 'selected' : ''}`}
+                onClick={(e) => handleCellClick(rowIndex, cellIndex,e)}
               >
                 {cell}
               </span>
