@@ -22,6 +22,7 @@
     .bulk {
       display: grid;
       grid-template-columns: repeat(10, 50px); 
+      cursor: pointer;
       width: 60%;
     margin-bottom: 40px;
     .bulk-cell {

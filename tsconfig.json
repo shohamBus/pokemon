@@ -22,15 +22,10 @@
 	  "esModuleInterop": true
 	},
 	"include": [
-	  "src/**/*",
-	  "src/**/*.tsx",
-	  "files",
-	  "src/",
-	  "*.tsx",
-	  "**/*.js",
-	  "test/",
-	  "eslint.config.mjs" ,
-	  "index.tsx",
+	  "src/**/*"
 	],
-	"exclude": ["node_modules", "generator", "dist"]
+	"exclude": [
+	  "node_modules",
+	  "dist"
+	]
   }
