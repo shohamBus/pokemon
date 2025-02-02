@@ -8,18 +8,18 @@ import { Link } from 'react-router-dom';
 
 
 function App() {
-   const { type } = useContext(PokemonModalContext) as PokemonModalContextType;
+  const { type } = useContext(PokemonModalContext) as PokemonModalContextType;
 
   return (
     <>
-        <div className='wrapper'>
-        <h1 className='logo-pokemon'>Let's get to know the   Pokémon</h1>
-          <TypesBar />
-          <Link className='button-play' to={`/game`}><span >Let's play</span></Link>
-         <PokemonsContainer type={type} />
-        </div>
-        <Modal />
-        </>
+      <div className='wrapper'>
+        <h1 className='logo-pokemon'>The world of Pokémons</h1>
+        <TypesBar />
+        <Link className='button-play' to={`/game`}><span >Let's play</span></Link>
+        <PokemonsContainer type={type} />
+      </div>
+      <Modal />
+    </>
   )
 }
 

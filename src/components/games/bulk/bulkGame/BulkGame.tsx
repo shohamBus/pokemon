@@ -10,11 +10,12 @@ interface BulkProps {
 }
 
 const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
-  const maxLengthWord = useMemo(() => (level === 1 ? 8 : level === 2 ? 10 : 12), [level])
+  const maxLengthWord = useMemo(() => (level === 1 ? 7 : level === 2 ? 9 : 10), [level])
   const [grid, setGrid] = useState<string[][]>([]);
   const [selectedCells, setSelectedCells] = useState<{ row: number; col: number }[]>([]);
   const foundWords = useMemo(() => new Set<string>(), []);
   const [foundCells, setFoundCells] = useState<{ row: number; col: number }[]>([]);
+  const [tempFoundCells, setTempFoundCells] = useState<{ row: number; col: number }[]>([]);
   interface TransformedPokemon {
     name: string;
     bulkName: string;
@@ -26,7 +27,7 @@ const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
     return pokemons
       ?.filter(pokemon => pokemon.name.replace(/\s+/g, '').length <= maxLengthWord) // Filter Pokémon whose names (without spaces) are 10 characters or less
       .sort(() => Math.random() - 0.5)
-      .slice(0, maxLengthWord - 1)
+      .slice(0, maxLengthWord - 3)
       .map(pokemon => ({
         name: pokemon.name,
         bulkName: pokemon.name.split(' ').join(''),
@@ -40,6 +41,7 @@ const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
     const newGrid = generateGrid(maxLengthWord, maxLengthWord, randomPokemons.map(p => p.name.replace(/\s+/g, '').toLowerCase()));
     setGrid(newGrid);
     setFoundCells([]);
+    setTempFoundCells([]);
   }, [level]);
 
   const getRandomPokemons = (pokemonsForTheGame: TransformedPokemon[], count: number) => {
@@ -57,7 +59,7 @@ const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
     ];
 
     const placeWord = (word: string) => {
-      const maxAttempts = 100; // Maximum number of attempts to place a word
+      const maxAttempts = 100;
       let attempts = 0;
       let placed = false;
 
@@ -103,13 +105,13 @@ const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
     words.forEach(word => placeWord(word));
 
     // Fill remaining empty spaces with random lowercase letters
-    // for (let i = 0; i < rows; i++) {
-    //   for (let j = 0; j < cols; j++) {
-    //     if (grid[i][j] === '') {
-    //       grid[i][j] = String.fromCharCode(97 + Math.floor(Math.random() * 26)); // 'a' is 97 in ASCII
-    //     }
-    //   }
-    // }
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        if (grid[i][j] === '') {
+          grid[i][j] = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+        }
+      }
+    }
 
     return grid;
   };
@@ -126,49 +128,58 @@ const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
         if (words.includes(selectedWord)) {
           foundWords.add(selectedWord);
           setFoundCells([...foundCells, ...selectedCells]);
+          setTempFoundCells([...foundCells, ...selectedCells]);
           setSelectedCells([]);
         }
       } else {
         setSelectedCells([]);
+        setTempFoundCells([...foundCells,])
       }
-
-
     }
-  }, [selectedCells, grid, pokemonsForTheGame, foundWords]);
+  }, [selectedCells, grid, pokemonsForTheGame, foundWords, foundCells]);
 
   return (
-    <div className='bulk-container'>
-      <div className='name-list'>
-        <h2>Random Pokemons</h2>
-        <ol>
-          {pokemonsForTheGame.slice(0, 10).map((pokemon, index) => (
-            <li key={index} className={`pokemon-name ${foundWords.has(pokemon.bulkName) ? 'found' : ''}`}>
-              {pokemon.name.toLowerCase()}
-            </li>
-          ))}
-        </ol>
-      </div>
-      <div className='bulk'>
-        {grid.map((row, rowIndex) => (
-          <div key={rowIndex} className='bulk-row'>
-            {row.map((cell, cellIndex) => (
-              <span
-                key={cellIndex}
-                className={`bulk-cell ${selectedCells.some(selected => selected.row === rowIndex && selected.col === cellIndex) ? 'selected' : ''} ${foundCells.some(found => found.row === rowIndex && found.col === cellIndex) ? 'found' : ''}`}
-                onClick={() => {
-                  handleCellClick(rowIndex, cellIndex);
-                  // if (foundCells.some(found => found.row === rowIndex && found.col === cellIndex)) {
-                  //   setFoundCells(foundCells.filter(found => !(found.row === rowIndex && found.col === cellIndex)));
-                  // }
-                }}
-              >
-                {cell}
-              </span>
+    <>
+      {foundWords.size >= maxLengthWord - 4 && (
+        <div className="success-title">Well done!</div>
+      )}
+      <div className='bulk-container'>
+        <div className='name-list'>
+          <h2>Random Pokemons</h2>
+          <ol>
+            {pokemonsForTheGame.slice(0, 10).map((pokemon, index) => (
+              <li key={index} className={`pokemon-name ${foundWords.has(pokemon.bulkName) ? 'found' : ''}`}>
+                {pokemon.name.toLowerCase()}
+                {foundWords.has(pokemon.bulkName) ? <img src={pokemon.img} alt={pokemon.name} className={`image-pokemon`} />
+                  : <div className='image-pokemon-bg' />
+                }
+              </li>
             ))}
-          </div>
-        ))}
+          </ol>
+        </div>
+        <div className='bulk'>
+          {grid.map((row, rowIndex) => (
+            <div key={rowIndex} className='bulk-row'>
+              {row.map((cell, cellIndex) => (
+                <span
+                  key={cellIndex}
+                  className={`bulk-cell  ${tempFoundCells.some(found => found.row === rowIndex && found.col === cellIndex) ? 'found' : ''} ${selectedCells.some(selected => selected.row === rowIndex && selected.col === cellIndex) ? 'selected' : ''}`}
+                  onClick={() => {
+                    handleCellClick(rowIndex, cellIndex);
+                    if (foundCells.some(found => found.row === rowIndex && found.col === cellIndex)) {
+                      setTempFoundCells(foundCells.filter(found => !(found.row === rowIndex && found.col === cellIndex)));
+                      setSelectedCells([...selectedCells, { row: rowIndex, col: cellIndex }]);
+                    }
+                  }}
+                >
+                  {cell}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
