@@ -1,13 +1,10 @@
 import React, { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.scss'
-import App from './App'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Loader } from 'components/loader/Loader';
-import { Games } from 'components/games/Games';
 import { PokemonModalProvider } from 'context/PokemonModalProvider';
+import App from './App';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,19 +15,13 @@ const queryClient = new QueryClient({
 });
 
 createRoot(document.getElementById('root')!).render(
-  <Router>
-    <PokemonModalProvider>
-      <React.StrictMode>
-        <Suspense fallback={<Loader />}>
-          <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools />
-            <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/game" element={<Games />} />
-            </Routes>
-          </QueryClientProvider>
-        </Suspense>
-      </React.StrictMode>
-    </PokemonModalProvider>
-  </Router>
+  <PokemonModalProvider>
+    <React.StrictMode>
+      <Suspense fallback={<Loader />}>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </Suspense>
+    </React.StrictMode>
+  </PokemonModalProvider>
 )
