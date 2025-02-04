@@ -7,7 +7,7 @@
     padding: 20px;
     .stage{
         background: currentColor;
-        background: linear-gradient(135deg, currentColor 0%, lighten(#ffffff, 20%) 100%);
+        background: linear-gradient(135deg, currentColor 0%, adjust-color(#ffffff, $lightness: 20%) 100%);
         display: flex;
         width: 300px;
         height:  100px;

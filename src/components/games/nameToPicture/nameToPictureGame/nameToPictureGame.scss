@@ -95,6 +95,7 @@
         border-radius: 8px;
         transition: transform 0.2s;
         box-shadow: 0 15px 40px 0 currentColor;
+        margin: 10px;
         @media screen and (max-width: 950px) {
           width: 100px;
           height: 100px;
@@ -112,7 +113,6 @@
         &:hover {
             transform: scale(1.05);
         }
-        margin: 10px;
         .text-card{
             margin: 40px ;
             color: #000;
