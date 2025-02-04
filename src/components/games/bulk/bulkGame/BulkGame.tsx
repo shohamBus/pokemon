@@ -42,6 +42,7 @@ const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
     setGrid(newGrid);
     setFoundCells([]);
     setTempFoundCells([]);
+    foundWords.clear()
   }, [level]);
 
   const getRandomPokemons = (pokemonsForTheGame: TransformedPokemon[], count: number) => {

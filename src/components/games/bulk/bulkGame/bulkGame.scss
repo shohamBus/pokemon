@@ -1,7 +1,7 @@
 .bulk-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 
     .name-list{
         width: 30%;
@@ -43,7 +43,6 @@
     background: url('/images/pokeball.svg');
     background-repeat: no-repeat;
     background-position: center;
-    animation: spin 2s linear ;
     transition: opacity 2s ease-in-out;
 }
 
@@ -64,7 +63,9 @@
       display: grid;
       grid-template-columns: repeat(10, 50px); 
       cursor: pointer;
-      width: 60%;
+      @media screen and (max-width: 550px) {
+        grid-template-columns: repeat(10, 30px); 
+      }
     margin-bottom: 40px;
     .bulk-cell {
       width: 50px;
@@ -77,6 +78,10 @@
       color: #000;
       font-weight: bold;
       background-color: #fff; 
+      @media screen and (max-width: 550px) {
+        width: 30px;
+      height: 30px;
+      }
     }
     .bulk-cell.selected {
       background-color: #ffeb3b; 
@@ -99,5 +104,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .name-list{
+      width: 80%;
+      padding: 20px;
+      align-self: center;
+    }
     }
 }

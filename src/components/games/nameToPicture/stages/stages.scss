@@ -2,12 +2,15 @@
     width: 100%;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
     .stage{
         background: currentColor;
+        background: linear-gradient(135deg, currentColor 0%, lighten(#ffffff, 20%) 100%);
         display: flex;
-        width: 30%;
+        width: 300px;
+        height:  100px;
         padding: 1vw 2vw;
         flex-wrap: wrap;
         align-items: center;
@@ -16,17 +19,59 @@
         gap: 15px;
         border-radius: 10vw;
         &.pass{
-            box-shadow: 0 0 10px 5px #06f306;
+            position: relative;
+            right: 0;
+            &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            width: 80%;
+            height: 80%;
+            transform: translate(-50%, -50%);
+            background: url('/images/pokeball.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: opacity 2s ease-in-out;
+            }
         }
         &.active{
-            box-shadow: 0 0 10px 5px #eaebea;
+            position: relative;
+            right: 0;
+            &::after {
+            content: '';
+            position: absolute;
+            left: 35%;
+            width: 80%;
+            height: 80%;
+            transform: translate(-50%, -50%);
+            background: url('/images/pokeball.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: spin 2s linear infinite;
+            transition: opacity 2s ease-in-out;
+        }
         }
         &.disable{
-            box-shadow: 0 0 20px 15px #cc3c3c;
-            background: rgb(133, 124, 124);
+            position: relative;
+            right: 0;
+            filter: grayscale(100%);
+            &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            width: 80%;
+            height: 80%;
+            transform: translate(-50%, -50%);
+            background: url('/images/pokeball.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: grayscale(100%);
+            transition: opacity 2s ease-in-out;
+            }
         }
         .stage-text{
-            font-size: 1.5vw;
             color: #000;
         }
     }

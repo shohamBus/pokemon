@@ -95,7 +95,10 @@
         border-radius: 8px;
         transition: transform 0.2s;
         box-shadow: 0 15px 40px 0 currentColor;
-       
+        @media screen and (max-width: 950px) {
+          width: 100px;
+          height: 100px;
+        }
         .selected {
             background: yellow;
             border-radius: 15px;
@@ -117,6 +120,12 @@
             font-size: min(30px, 2.5vw);
             text-align: center;
             text-overflow: ellipsis;
+            @media screen and (max-width: 950px) {
+              font-size: min(15px, 3.5vw);
+              text-align: center;
+              text-overflow: ellipsis;
+            }
+        
         }
     
        .image-card{

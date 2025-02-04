@@ -22,6 +22,7 @@ function App() {
           <h1 className='logo-pokemon'>The world of Pokémons</h1>
           <TypesBar />
           <button className='button-play' onClick={navigateToGame}><span>Let's play</span></button>
+
           <PokemonsContainer type={type} />
         </div>
       ) : (

@@ -214,19 +214,18 @@ $types: (
 }
 
 
-/* style main components */
-#root {
-  padding: 2vw 7.5vw;
-}
+
 
 .wrapper {
   display: flex;
   flex-direction: column;
+  padding: 0 2vw;
 }
 
 .wrapper .logo-pokemon {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
   font-family: 'Pokemon Solid', sans-serif;
   font-size: max(5vw, 5rem);
@@ -234,10 +233,15 @@ $types: (
   text-align: center;
   -webkit-text-stroke: 5px #3b5ca8;
   text-shadow: -1px 0px 0px #1d2c5e;
+  @media screen and (max-width: 400px) {
+    font-size: 40px;
+    color: #030303;
+    -webkit-text-stroke:0;
+  }
 }
 
 .wrapper .logo-pokemon::before {
-  content: 'Pokédex';
+  content: '';
   position: absolute;
   left: -5px;
   bottom: -6px;
@@ -436,13 +440,7 @@ td > img {
 }
 
 
-
-
-
 @media screen and (min-width: 880px) {
-  #root {
-    padding: 0.5vw 5vw;
-  }
 
   .modal {
     --main-padding: 3vw 3vw 0 3vw;

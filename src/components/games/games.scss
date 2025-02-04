@@ -51,65 +51,44 @@
   }
 }
 .go-back-section {
-  cursor: pointer;
-  color: #000;
   display: flex;
   align-items: center;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  width: 120px;
-  padding: 5px;
-  border: 2px solid #000;
-  border-radius: 15px;
-  margin-bottom: 15px;
+  justify-content: center;
+  padding: 10px 20px;
+  margin: 20px;
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  &:hover {
-    color: #ff0000;
-    transform: rotate(360deg);
-  }
+.go-back-section:hover {
+  background-color: #ff4c3b;
+  transform: scale(1.05);
+}
 
-  .arrow-back {
-    position: relative;
-    display: inline-block;
-    width: 20px;
-    height: 2px;
-    margin-right: 10px;
-    background: #000;
-    transition: all 0.3s ease;
+.arrow-back {
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+  margin-right: 10px;
+  transition: transform 0.3s;
+}
 
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: -5px;
-      width: 8px;
-      height: 8px;
-      border: 2px solid #000;
-      border-top-color: transparent;
-      border-right-color: transparent;
-      transform: rotate(45deg);
-      transition: all 0.3s ease;
-    }
-  }
+.go-back-section:hover .arrow-back {
+  transform: rotate(45deg) translateX(-3px);
+}
 
-  &:hover .arrow-back {
-    background: #ff0000;
-    border-right-color: transparent;
-    border-top-color: transparent;
-   
-  }
-
-  &:hover .arrow-back::before {
-    border-color: #ff0000;
-    border-right-color: transparent;
-    border-top-color: transparent;
-  }
-
-  .go-back {
-    font-size: 16px;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
+.go-back {
+  margin-left: 10px;
 }
 }
 .wrapper-buttons{
@@ -120,23 +99,57 @@
   flex-wrap: wrap;
   margin: 0 auto;
   width: 100%;
-.button-play{
-  display: flex;
-  width: 40%;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  background: #eef5fd;
-  border-radius: 10vw;
-  box-shadow: 0 0 10px 5px #b4b3b3;
-  font-size:30px;
-  color: #000;
-  &:hover {
-    border: none;
-    transform: scale(1.1);
-    transition: transform .10s;
-    box-shadow: 0 0 10px 5px #d5d5d5;
-  }
+  .button-play {
+    position: relative;
+    display: flex;
+    width: 40%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background: #eef5fd;
+    border-radius: 10vw;
+    box-shadow: 0 0 10px 5px #b4b3b3;
+    font-size: 30px;
+    color: #000;
+    overflow: hidden; 
+    @media screen and (max-width: 500px) {
+      font-size: 20px;
+      text-align: center;
+      text-overflow: ellipsis;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      background: url('/images/pokeball.svg') no-repeat center center;
+      background-size: contain;
+      width: 100px; 
+      height: 100px;
+      opacity: 0.2;
+      z-index: 1; 
+      transition: transform 0.5s ease; 
+    }
+    &.active{
+      border: 5px solid #ff6f61;
+    }
+    &.rotate::before {
+      animation: rotate-bg 2s ease;
+      animation-fill-mode: forwards; 
+    }
   
+    &:hover {
+      border: none;
+      transform: scale(1.1);
+      transition: transform 0.1s;
+      box-shadow: 0 0 10px 5px #d5d5d5;
+    }
+  }
 }
-}
+  @keyframes rotate-bg {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(720deg); 
+    }
+  }
