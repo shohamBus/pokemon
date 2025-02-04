@@ -75,13 +75,13 @@
 .name-page-section{
     display: flex;
     justify-content: space-around;
-    gap: 10px;
+    gap: 50px;
+
    
     .cards-section{
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 10px;
     .card {
         background: currentColor;
         width: 200px;
