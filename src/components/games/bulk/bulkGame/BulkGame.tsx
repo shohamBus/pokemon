@@ -162,7 +162,7 @@ const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
           {grid.map((row, rowIndex) => (
             <div key={rowIndex} className='bulk-row'>
               {row.map((cell, cellIndex) => (
-                <span
+                <div
                   key={cellIndex}
                   className={`bulk-cell  ${tempFoundCells.some(found => found.row === rowIndex && found.col === cellIndex) ? 'found' : ''} ${selectedCells.some(selected => selected.row === rowIndex && selected.col === cellIndex) ? 'selected' : ''}`}
                   onClick={() => {
@@ -174,7 +174,7 @@ const BulkGame: React.FC<BulkProps> = ({ pokemons, level }) => {
                   }}
                 >
                   {cell}
-                </span>
+                </div>
               ))}
             </div>
           ))}

@@ -1,6 +1,34 @@
 .pokemons-container {
+display: flex;
+flex-direction: column;
+flex-wrap: nowrap;
+  
+    .pokemons-cards{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+  .pagination-controls {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 40px;
+    padding: 40px;
   }
+  
+  .pagination-controls button {
+    margin: 0 10px;
+    align-items: stretch;
+    padding: 20px 40px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 0.25;
+  }
+  
+  .pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
