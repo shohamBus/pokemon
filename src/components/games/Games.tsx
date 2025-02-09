@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NameToPicture } from './nameToPicture/NameToPicture'
 import './games.scss'
 import { PokemonModalContext, PokemonModalContextType } from 'context/PokemonModalProvider';
@@ -10,6 +10,9 @@ export const Games = () => {
   const { type } = useContext(PokemonModalContext) as PokemonModalContextType;
   const [game, setGame] = useState<number>(0);
   const pokemons = usePokemons(type || 'fighting') || [];
+  useEffect(() => {
+    handleButtonClick(0)
+  }, [])
 
   const handleButtonClick = (index: number) => {
     setGame(index);
